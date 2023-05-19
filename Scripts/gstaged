@@ -1,0 +1,10 @@
+#!/bin/bash
+# Prints all of the local commits that have not been pushed
+
+git log --branches --not --remotes
+
+# seems to do the same thing but only for origin/master:
+# git log origin/master..HEAD
+
+# with diffs
+# git diff origin/master..HEAD

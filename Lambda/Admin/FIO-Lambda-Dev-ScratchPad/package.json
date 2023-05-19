@@ -1,0 +1,22 @@
+{
+  "name": "FIO-Lambda-Dev-ScratchPad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.6.1",
+    "csv-parse": "^4.3.3",
+    "fuzzy-search": "^3.0.1",
+    "json2csv": "^4.3.0",
+    "lodash": "^4.17.11",
+    "plaid": "^2.15.0",
+    "rollbar": "^2.5.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,8 @@
+{
+    "FIO-Lambda-User-Transaction-Search": {
+        "lambda": {
+            "userId": "us-east-1:1c52a640-78f5-4b21-b5ac-6c3ce26fc81e",
+            "query": "starbucks"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+
+Request Mapping Template
+
+{
+  "version" : "2017-02-28",
+  "operation": "Invoke",
+  "payload": {
+    "userId": $utils.toJson($context.identity.cognitoIdentityId),
+    ## "userId": $utils.toJson("us-east-1:ca78c5e8-a7e4-4923-869d-4238f30c1071"),
+    "item_id": $utils.toJson($context.arguments.item_id)
+  }
+}
+
+Response Mapping Template
+
+$util.toJson($context.result)

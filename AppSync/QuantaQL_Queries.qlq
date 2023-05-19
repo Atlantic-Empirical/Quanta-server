@@ -1,0 +1,686 @@
+query TransactionsForAccount($maid: String!) {
+    transactionsForAccount(maid: $maid) {
+        name
+        date
+        amount
+        transaction_id
+        category
+        masterAccountId
+        fioCategoryId
+        pending
+    }
+}
+
+query GetUserHome {
+  getUserHome {
+    items {
+      institution_id
+      institution_name
+      item_id
+      needsUpdate
+      env
+      createdDate
+      lastTransactionPull
+      institutionDetails {
+        colors {
+            dark
+            darker
+            light
+            primary
+        }
+        brand_name
+        brand_subheading
+        link_health_status
+        name
+        url
+        url_account_locked
+        health_status
+      }
+      transactionDetails {
+        latestTransactionAmount
+        latestTransactionDate
+        latestTransactionName
+        oldestTransactionDate
+        transactionCount
+      }
+    }
+    accounts {
+      masterAccountId
+      displayName
+      hidden
+      institution_id
+      balances {
+          available
+          current
+          limit
+      }
+      institution_name
+      item_id
+      lastSynced
+      mask
+      name
+      official_name
+      subtype
+      type
+    }
+    transactionOverview {
+      totalIn
+      totalOut
+      oldestTransactionDate
+      transactionCount
+    }
+    spending {
+      totalAmount
+      months {
+        amount
+        month
+      }
+      monthsAnalyzed
+      categories {
+        startDate
+        endDate
+        lookbackDayCount
+        total
+        names
+        percentages
+        descriptions
+        amounts
+        tids
+      }
+      vendorAnalysis {
+        slug
+        name
+        dailyAvg
+        historicalTwelveMonths
+        historicalThreeMonths
+        twelveMonthTids
+        threeMonthTids
+      }
+      basicLivingExpenses {
+        estimatedMonthlyAmount
+        summary {
+            categoryId
+            average
+            friendlyName
+        }
+        months {
+            monthTotal
+            allTids
+            monthStr
+            monthStartDate
+            monthEndDate
+            byCategory {
+                categoryId
+                amount
+                tids
+            }
+        }
+      }
+      daily {
+        averageAmount
+        daysAnalyzed
+      }
+      streams {
+        streamType
+        periodSize
+        nameFriendly
+        tids
+        periodsPerYear
+        fioCategoryId
+        transactionCount
+        dates
+        amountDistribution {
+            annualEstimate
+            totalAmountEver
+            mean
+            relativeStandardDeviationPct
+            standardDeviation
+            dailyEstimate
+            monthlyEstimate
+            sum
+        }
+        dateDistribution {
+            avgDiffDays
+            daysUntilNext
+            duration
+            firstDate
+            firstDaysAgo
+            lastDate
+            lastDaysAgo
+            relativeStandardDeviationPct
+            standardDeviation
+        }
+      }
+    }
+    moneyRental {
+      creditCards {
+        accountMaids
+        costOfOneDollar
+        daysAnalyzed
+        rent {
+          averagePerDay
+          dailyPeriodicRate
+          daysAnalyzed
+          percentOfDailyNet
+          totalInAnalysisPeriod
+        }
+        balance {
+          current {
+            total
+            totalSubjectToLimit
+            totalLimit
+            totalEffectiveBalance
+            utilizationPercentage
+          }
+          historical {
+            daysAnalyzed
+            avgBalance
+            avgMMCarryOver
+            MMCarryOvers
+            dates {
+                date
+                balance
+                utilization
+            }
+          }
+        }
+      }
+    }
+    income {
+      summary {
+        activeDailyEstimate
+        analyzedDepositCount
+        analyzedAccountMaids
+        oldestActiveStreamStartDate
+      }
+      activeStreams {
+        streamType
+        periodSize
+        identifiedIn
+        slug
+        nameFriendly
+        tids
+        amountDistribution {
+            annualEstimate
+            totalAmountEver
+            mean
+            relativeStandardDeviationPct
+            standardDeviation
+            dailyEstimate
+            monthlyEstimate
+            sum
+        }
+        dateDistribution {
+            avgDiffDays
+            daysUntilNext
+            duration
+            firstDate
+            firstDaysAgo
+            lastDate
+            lastDaysAgo
+            relativeStandardDeviationPct
+            standardDeviation
+        }
+      }
+      inactiveStreams {
+        streamType
+        periodSize
+        identifiedIn
+        slug
+        nameFriendly
+        tids
+        amountDistribution {
+            annualEstimate
+            totalAmountEver
+            mean
+            relativeStandardDeviationPct
+            standardDeviation
+            dailyEstimate
+            monthlyEstimate
+            sum
+        }
+        dateDistribution {
+            avgDiffDays
+            daysUntilNext
+            duration
+            firstDate
+            firstDaysAgo
+            lastDate
+            lastDaysAgo
+            relativeStandardDeviationPct
+            standardDeviation
+        }
+      }
+      tidsForActiveStreams
+    }
+    financialIndependence {
+      totalCapital
+      safeWithdrawal
+      liquidCushion {
+        current {
+          balance
+          months
+          monthsAsPercentage
+        }
+        historical {
+          months {
+            month
+            bufferAtStartOfMonth
+          }
+          dates {
+            date
+            balance
+          }
+          averageBalance
+          daysAnalyzed
+        }
+        accountMaids
+        consts {
+          targetSafetyMonths
+        }
+      }
+      savingsRate {
+    	income_90d
+    	income_365d
+    	net_365d
+    	net_90d
+    	dateStr_90d
+    	dateStr_365d
+    	actualSavingsRate_90d
+    	actualSavingsRate_365d
+    	potentialSavingsRate_90d
+    	potentialSavingsRate_365d
+        depositsSum_90d
+        depositsSum_365d
+        withdrawalsSum_90d
+        withdrawalsSum_365d
+        netLongtermMoney_90d
+        netLongtermMoney_365d
+        depositTids
+        withdrawalTids
+	  }
+    }
+  }
+}
+
+query GetPublicTokenForItem($item_id: String!) {
+    getPublicTokenForItem(item_id: $item_id)
+}
+
+query HideAccounts($account_ids: [String!], $masterAccountIds: [String!], $hiddenState: Boolean) {
+    hideAccounts(account_ids: $account_ids, masterAccountIds: $masterAccountIds, hiddenState: $hiddenState)
+}
+
+query GetQuantizeStatus {
+  getQuantizeStatus
+}
+
+query UserAuthExists($phoneNumber: String!) {
+    userAuthExists(phoneNumber: $phoneNumber)
+}
+
+query SearchTransactions($query: String!) {
+    searchTransactions(query: $query) {
+        ...transactionSearchResult
+    }
+}
+
+fragment transactionSearchResult on FIOTransaction {
+    date
+    masterAccountId
+    transaction_type
+    institution_id
+    item_id
+    amount
+    fioCategoryId
+    category_id
+    transaction_id
+    name
+}
+
+query GetFlowPeriods($windowSize: Int!, $periodIdStart: String, $periodIdEnd: String, $nextToken: String) {
+    getFlowPeriods(windowSize: $windowSize, periodIdStart: $periodIdStart, periodIdEnd: $periodIdEnd, nextToken: $nextToken) {
+        nextToken
+        periods {
+            periodId
+            windowSize
+            daysInRange
+            startDate
+            endDate
+            daysRemainingInPeriod
+            dayNets
+            includesEndOfData
+            projection {
+                net
+                incomeTotal
+                spendTotal
+            }
+            periodSummary {
+                spending {
+                    actual
+                    target
+                    projected
+                }
+                categories {
+                    total
+                    names
+                    percentages
+                    descriptions
+                    amounts
+                }
+                balances {
+                    accountSubtype
+                    startingBalance
+                    endingBalance
+                }
+                isFillerObject
+                netAmount
+                income
+                transactions {
+                    totalAmount
+                    deposits {
+                        totalAmount
+                        transactionIds
+                    }
+                    debits {
+                        totalAmount
+                        transactionIds
+                        transactions {
+                            name
+                            amount
+                            transaction_id
+                            fioCategoryId
+                            date
+                            masterAccountId
+                            pending
+                        }
+                    }
+                    transfers {
+                        totalAmount
+                        transactionIds
+                        transactionSummaries {
+                            transaction_id
+                            amount
+                            fioCategoryId
+                        }
+                    }
+                    regularIncome {
+                        totalAmount
+                        transactionIds
+                    }
+                    creditCardPayments {
+                        totalAmount
+                        destinationAccountNames
+                        sourceAccountNames
+                        payments {
+                            amount
+                            from {
+                                name
+                                date
+                                amount
+                                transaction_id
+                                category
+                                masterAccountId
+                                fioCategoryId
+                                account {
+                                    displayName
+                                    hidden
+                                    masterAccountId
+                                    institution_id
+                                    balances {
+                                        available
+                                        limit
+                                        current
+                                    }
+                                    institution_name
+                                    item_id
+                                    lastSynced
+                                    mask
+                                    name
+                                    official_name
+                                    subtype
+                                    type
+                                }
+      	                        ...transactionDetails
+                            }
+                            to {
+                                name
+                                date
+                                amount
+                                transaction_id
+                                category
+                                masterAccountId
+                                fioCategoryId
+                                account {
+                                    displayName
+                                    hidden
+                                    masterAccountId
+                                    institution_id
+                                    balances {
+                                        available
+                                        limit
+                                        current
+                                    }
+                                    institution_name
+                                    item_id
+                                    lastSynced
+                                    mask
+                                    name
+                                    official_name
+                                    subtype
+                                    type
+                                }
+      	                        ...transactionDetails
+      	                    }
+                       }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fragment transactionDetails on FIOTransaction {
+    account_owner
+    category_id
+    insertTimestamp
+    institution_id
+    item_id
+    pending
+    pending_transaction_id
+    transaction_type
+    account_name
+    account_institution_name
+    payment_meta {
+        by_order_of
+        payee
+        payer
+        payment_method
+        payment_processor
+        ppd_id
+        reason
+        reference_number
+    }
+}
+
+query GetItemStatus($item_id: String, $link_session_id: String) {
+    getItemStatus(item_id: $item_id, link_session_id: $link_session_id) {
+        item_id
+        hasAccessToken
+        flowDateCount
+        oldestFlowDate
+        quantizeStatus
+        itemSetupCompleted
+        webhookSummary {
+        totalTransactionHookCount
+        initialHookDate
+        transactionCountTotal
+        transactionsRemovedCount
+        numberOfTransactionsThatShouldBeInSystem
+        secondsBetweenInitialAndHistoricalHooks
+        historicalTransactionsHook {
+            webhook_type
+            new_transactions
+            item_id
+            webhook_code
+            timestamp
+            error {
+                error_type
+                error_code
+                error_message
+                display_message
+            }
+        }
+        initialTransactionsHook {
+            webhook_type
+            new_transactions
+            item_id
+            webhook_code
+            timestamp
+            error {
+                error_type
+                error_code
+                error_message
+                display_message
+            }
+        }
+        }
+        totalTransactionCount
+        transactionSummary {
+            oldestTransaction
+            transactionCount
+            daysSinceFirst
+            transactions {
+                name
+                date
+                amount
+                qioTransactionType
+                transaction_id
+                ...transactionDetails
+            }
+        }
+        accounts {
+            displayName
+            hidden
+            masterAccountId
+            institution_id
+            balances {
+                current
+                limit
+                available
+            }
+            institution_name
+            item_id
+            lastSynced
+            mask
+            name
+            official_name
+            subtype
+            type
+            statementDays {
+                date
+                startingBalance
+                endingBalance
+                interestPaid
+                dpr
+                adbPeriod
+                adb
+                interestTransaction {
+                    name
+                    date
+                    amount
+                    transaction_id
+                    category
+                    masterAccountId
+                    fioCategoryId
+                    ...transactionDetails
+                }
+            }
+        }
+    }
+}
+
+query GetTransactions($transaction_ids: [String], $returnSummary: Boolean = true) {
+    getTransactions(transaction_ids: $transaction_ids) {
+        name
+        date
+        amount
+        transaction_id
+        category
+        masterAccountId
+        fioCategoryId
+        pending
+        ...transactionDetails @skip(if: $returnSummary)
+    }
+}
+
+query PutItem($item: FIOPlaidItemInput!, $force: Boolean, $isUpdate: Boolean) {
+    putItem(item: $item, force: $force, isUpdate: $isUpdate)
+}
+
+mutation NewApnToken ($token: String!, $platform: String!) {
+    newApnToken(token: $token, platform: $platform)
+}
+
+query RemoveItem ($item_id: String!) {
+    removeItem(item_id: $item_id)
+}
+
+query DeleteUser($dumbString: String) {
+    deleteUser(dummyArgToAvoidClientCrash: $dumbString)
+}
+
+mutation PutSub ($sub: String!) {
+    putSub(sub: $sub)
+}
+
+mutation ValidateReceipt ($receipt: String!) {
+    validateReceipt(receipt: $receipt) {
+        expires_date_formatted_pst
+        expiresDateSec
+        originalTransactionDateSec
+        latestTransactionDateSec
+        is_trial_period
+        is_in_billing_retry_period
+        auto_renew_status
+        expiration_intent
+    }
+}
+
+query GetSubscriptionStatus {
+    getSubscriptionStatus {
+        expires_date_formatted_pst
+        expiresDateSec
+        originalTransactionDateSec
+        latestTransactionDateSec
+        is_trial_period
+        is_in_billing_retry_period
+        auto_renew_status
+        expiration_intent
+        promoGrantUntilTimestamp
+    }
+}
+
+query PromoCode($promoCode: String) {
+    promoCode(promoCode: $promoCode) {
+        promoGrantUntilTimestamp
+    }
+}
+
+query GetInstitution($ins_id: String!) {
+    getInstitution(ins_id: $ins_id) {
+        colors {
+            dark
+            darker
+            light
+            primary
+        }
+        brand_name
+        brand_subheading
+        link_health_status
+        name
+        url
+        url_account_locked
+        health_status
+    }
+}

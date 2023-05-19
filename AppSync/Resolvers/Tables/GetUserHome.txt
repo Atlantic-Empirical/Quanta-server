@@ -1,0 +1,8 @@
+{
+    "version": "2017-02-28",
+    "operation": "GetItem",
+    "key": {
+        "userId": $util.dynamodb.toDynamoDBJson($ctx.identity.cognitoIdentityId)
+        ## "userId": $util.dynamodb.toDynamoDBJson("us-east-1:59514d39-0637-49a5-af66-29f8e2f0f9da")
+    }
+}

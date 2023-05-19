@@ -1,0 +1,57 @@
+{
+    "FIO-Lambda-Dev-ScratchPad": {
+        "lambda": {
+            "userId": "us-east-1:69ba80be-9484-423c-9d23-b82c42ebc734",
+            "yesterday": {
+                "date": "2019-06-12",
+                "transactions": {
+                    "regularIncome": {
+                        "totalAmount": 0,
+                        "transactionIds": []
+                    },
+                    "transfers": {
+                        "totalAmount": 0,
+                        "transactionIds": []
+                    },
+                    "debits": {
+                        "totalAmount": -105.99,
+                        "transactionIds": [
+                            "oY3NKjKVb0TeP1BAMMAmUYQQewqb0giBdyxON",
+                            "vMjb4645dPF43YExqqxbSPwO3wYaoLtmvBMv7",
+                            "Rxz8169dwQcqLddNErnoHx5X46BvB9fyBEPA4",
+                            "gEwOLBL94ysJVYX1441Zf8pp1AMP04FqMa7Ak"
+                        ],
+                        "transactions": [
+                            {
+                                "transaction_id": "0zpdqb8RKyuoZ11XE4YLCzOJRxqNvzHrMBAX0",
+                                "amount": 5.99,
+                                "date": "2019-06-10",
+                                "name": "CHECKCARD 06/10 REDDIT GOLD 4029357733",
+                                "fioCategoryId": 0,
+                                "masterAccountId": "04ebfdb2-9b96-4bb3-95de-29f7bb234fd2"
+                            },
+                            {
+                                "transaction_id": "KAz8ROa3EJCvXPP87y4YsBM5z4LLKVtQQrO7O",
+                                "amount": 100,
+                                "date": "2019-06-10",
+                                "name": "CHECKCARD SAN FRANCISCO CRO SAN FRANCISCO CA ON 06/06",
+                                "fioCategoryId": 5000,
+                                "masterAccountId": "2b848495-b49c-4570-a2aa-fc11e9ed538c"
+                            }
+                        ]
+                    },
+                    "deposits": {
+                        "totalAmount": 0,
+                        "transactionIds": []
+                    },
+                    "totalAmount": -105.99
+                },
+                "netAmount": -105.99,
+                "income": 0
+            }
+        }
+    },
+    "": {
+        "lambda": {}
+    }
+}

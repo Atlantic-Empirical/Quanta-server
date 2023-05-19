@@ -1,0 +1,8 @@
+{
+    "QIO-Lambda-ASDS-User-Subscription-PromoCode": {
+        "lambda": {
+            "userId": "us-east-1:69ba80be-9484-423c-9d23-b82c42ebc734",
+            "promoCode": "test1"
+        }
+    }
+}

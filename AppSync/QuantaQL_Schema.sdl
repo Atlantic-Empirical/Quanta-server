@@ -1,0 +1,596 @@
+type FIOAccountStatementDay {
+	date: String!
+	startingBalance: Float!
+	endingBalance: Float!
+	interestPaid: Float
+	dpr: Float
+	adbPeriod: Int
+	adb: Float
+	interestTransaction: FIOTransaction
+}
+
+type FIOFinAccount {
+	masterAccountId: String!
+	institution_id: String!
+	balances: FIOFinAccountBalances
+	institution_name: String!
+	item_id: String!
+	lastSynced: Float!
+	link_session_id: String
+	mask: String
+	name: String!
+	official_name: String
+	subtype: String!
+	type: String!
+	statementDays: [FIOAccountStatementDay!]
+	displayName: String
+	hidden: Boolean
+}
+
+type FIOFinAccountBalances {
+	available: Float
+	current: Float
+	limit: Float
+}
+
+type FIOFlowPeriod {
+	periodId: String!
+	windowSize: Int!
+	startDate: String!
+	endDate: String!
+	daysInRange: Int!
+	daysRemainingInPeriod: Int!
+	includesEndOfData: Boolean!
+	periodSummary: FIOFlowPeriodDetail!
+	dayNets: [Float!]
+	projection: FIOFlowPeriodProjection
+}
+
+type FIOFlowPeriodDetail {
+	netAmount: Float!
+	income: Float!
+	transactions: FIOFlowPeriodDetailTransactions
+	isFillerObject: Boolean
+	date: String
+	balances: [FIOPeriodBalance!]
+	categories: FIOSpendCategories
+	spending: FIOFlowPeriodSpending!
+}
+
+type FIOFlowPeriodDetailTransactionSet {
+	totalAmount: Float!
+	transactionIds: [String!]!
+	transactions: [FIOTransaction!]
+	transactionSummaries: [FIOTransaction!]
+}
+
+type FIOFlowPeriodDetailTransactions {
+	totalAmount: Float
+	deposits: FIOFlowPeriodDetailTransactionSet
+	debits: FIOFlowPeriodDetailTransactionSet
+	transfers: FIOFlowPeriodDetailTransactionSet
+	regularIncome: FIOFlowPeriodDetailTransactionSet
+	creditCardPayments: QIOFlowPeriodCreditCardPayments
+}
+
+type FIOFlowPeriodProjection {
+	net: Float
+	incomeTotal: Float
+	spendTotal: Float
+}
+
+type FIOFlowPeriodSpending {
+	actual: Float!
+	target: Float!
+	projected: Float
+}
+
+type FIOFlowScore {
+	responsibility: String!
+	magnitude: Int!
+}
+
+type FIOItem {
+	institution_name: String!
+	institution_id: String!
+	item_id: String!
+	needsUpdate: Boolean
+	env: String!
+	institutionDetails: QIOInstitution!
+	transactionDetails: QIOItem_TransactionDetails
+	createdDate: String!
+	lastTransactionPull: Float!
+}
+
+type FIOItemStatus {
+	item_id: String
+	hasAccessToken: Boolean!
+	webhookSummary: FIOItemStatusWebhookSummary!
+	quantizeStatus: String!
+	itemSetupCompleted: Boolean!
+	flowDateCount: Int
+	oldestFlowDate: String
+	transactionSummary: FIOItemStatusTransactionSummary
+	totalTransactionCount: Int
+	accounts: [FIOFinAccount!]
+}
+
+type FIOItemStatusTransactionSummary {
+	transactionCount: Int!
+	oldestTransaction: String!
+	transactions: [FIOTransaction!]!
+	daysSinceFirst: Int!
+}
+
+type FIOItemStatusWebhook {
+	webhook_type: String
+	new_transactions: Int
+	item_id: String
+	error: FIOItemStatusWebhookError
+	webhook_code: String
+	timestamp: Float
+}
+
+type FIOItemStatusWebhookError {
+	error_type: String
+	error_code: String
+	error_message: String
+	display_message: String
+}
+
+type FIOItemStatusWebhookSummary {
+	totalTransactionHookCount: Int
+	initialHookDate: String
+	transactionCountTotal: Int
+	transactionsRemovedCount: Int
+	numberOfTransactionsThatShouldBeInSystem: Int
+	historicalTransactionsHook: FIOItemStatusWebhook
+	initialTransactionsHook: FIOItemStatusWebhook
+	secondsBetweenInitialAndHistoricalHooks: Float
+}
+
+type FIOPeriodBalance {
+	accountSubtype: String!
+	startingBalance: Float!
+	endingBalance: Float!
+}
+
+input FIOPlaidItemInput {
+	metadata: FIOPlaidItemInputMetadata!
+	linkSessionId: String!
+	token: String!
+}
+
+input FIOPlaidItemInputMetadata {
+	status: String
+	request_id: String
+	institution: FIOPlaidItemInputMetadataInstitution
+}
+
+input FIOPlaidItemInputMetadataInstitution {
+	name: String
+	institution_id: String
+}
+
+type FIORecurringStreamAmountDistribution {
+	annualEstimate: Float!
+	totalAmountEver: Float!
+	mean: Float!
+	relativeStandardDeviationPct: Float!
+	standardDeviation: Float!
+	dailyEstimate: Float!
+	monthlyEstimate: Float!
+	sum: Float!
+}
+
+type FIORecurringStreamDateDistribution {
+	avgDiffDays: Float!
+	daysUntilNext: Int!
+	duration: Int!
+	firstDate: String!
+	firstDaysAgo: Int!
+	lastDate: String!
+	lastDaysAgo: Int!
+	relativeStandardDeviationPct: Float!
+	standardDeviation: Float!
+}
+
+type FIOSpendCategories {
+	amounts: [Float!]!
+	total: Float!
+	percentages: [Float!]!
+	names: [String!]!
+	descriptions: [String!]!
+}
+
+type FIOSubscriptionVerifyResponse {
+	expires_date_formatted_pst: String
+	expiresDateSec: Int
+	originalTransactionDateSec: Int
+	latestTransactionDateSec: Int
+	is_trial_period: Boolean
+	is_in_billing_retry_period: Boolean
+	auto_renew_status: Boolean
+	expiration_intent: Int
+	promoGrantUntilTimestamp: Int
+}
+
+type FIOTransaction {
+	name: String!
+	transaction_id: String!
+	amount: Float!
+	masterAccountId: String!
+	account_owner: String
+	category: [String]
+	category_id: Float
+	date: String!
+	insertTimestamp: Float
+	institution_id: String
+	item_id: String!
+	location: FIOTransactionLocation
+	payment_meta: FIOTransactionPaymentMetadata
+	pending: Boolean
+	pending_transaction_id: String
+	transaction_type: String
+	fioCategoryId: Int!
+	account_name: String
+	account_institution_name: String
+	account: FIOFinAccount
+	qioTransactionType: String
+	qioTransactionSubtype: String
+}
+
+type FIOTransactionLocation {
+	address: String
+	city: String
+	lat: Float
+	lon: Float
+	state: String
+	store_number: String
+	zip: String
+}
+
+type FIOTransactionPaymentMetadata {
+	by_order_of: String
+	payee: String
+	payer: String
+	payment_method: String
+	payment_processor: String
+	ppd_id: String
+	reason: String
+	reference_number: String
+}
+
+type FIOUserNotificationPreferences {
+	NotifScheduleCron: String
+	Timezone: String
+}
+
+type FIOUserPreferences {
+	notificationPrefs: [FIOUserNotificationPreferences]
+	pushDevices: [FIOUserPushNotificationDevice]
+}
+
+type FIOUserPushNotificationDevice {
+	tokenPlatform: Int
+	deviceToken: String
+	endpointArn: String
+}
+
+type Mutation {
+	newApnToken(token: String!, platform: String!): Boolean
+	putSub(sub: String!): Boolean
+	validateReceipt(receipt: String!): FIOSubscriptionVerifyResponse!
+}
+
+type PaginatedFlowPeriods {
+	periods: [FIOFlowPeriod!]
+	nextToken: String
+}
+
+type QIOFinancialIndependence {
+	totalCapital: Float
+	safeWithdrawal: Float
+	liquidCushion: QIOFinancialIndependence_LiquidCushion
+	savingsRate: QIOFinancialIndependence_SavingsRate
+}
+
+type QIOFinancialIndependence_LiquidCushion {
+	current: QIOFinancialIndependence_LiquidCushion_Current
+	historical: QIOFinancialIndependence_LiquidCushion_Historical
+	accountMaids: [String!]
+	consts: QIOFinancialIndependence_LiquidCushion_Consts
+}
+
+type QIOFinancialIndependence_LiquidCushion_Consts {
+	targetSafetyMonths: Float!
+}
+
+type QIOFinancialIndependence_LiquidCushion_Current {
+	balance: Float!
+	months: Float!
+	monthsAsPercentage: Float!
+}
+
+type QIOFinancialIndependence_LiquidCushion_Historical {
+	dates: [QIOFinancialIndependence_LiquidCushion_Historical_Date!]
+	months: [QIOFinancialIndependence_LiquidCushion_Historical_Month!]
+	averageBalance: Float!
+	daysAnalyzed: Int!
+}
+
+type QIOFinancialIndependence_LiquidCushion_Historical_Date {
+	date: String!
+	balance: Float!
+}
+
+type QIOFinancialIndependence_LiquidCushion_Historical_Month {
+	month: String!
+	bufferAtStartOfMonth: Float!
+}
+
+type QIOFinancialIndependence_SavingsRate {
+	income_90d: Float!
+	income_365d: Float!
+	net_365d: Float!
+	net_90d: Float!
+	dateStr_90d: String!
+	dateStr_365d: String!
+	actualSavingsRate_90d: Float!
+	actualSavingsRate_365d: Float!
+	potentialSavingsRate_90d: Float!
+	potentialSavingsRate_365d: Float!
+	depositsSum_90d: Float!
+	depositsSum_365d: Float!
+	withdrawalsSum_90d: Float!
+	withdrawalsSum_365d: Float!
+	netLongtermMoney_90d: Float!
+	netLongtermMoney_365d: Float!
+	depositTids: [String!]
+	withdrawalTids: [String!]
+}
+
+type QIOFlowPeriodCreditCardPaymentItem {
+	amount: Float!
+	from: FIOTransaction
+	to: FIOTransaction
+}
+
+type QIOFlowPeriodCreditCardPayments {
+	totalAmount: Float!
+	destinationAccountNames: [String!]
+	sourceAccountNames: [String!]
+	payments: [QIOFlowPeriodCreditCardPaymentItem!]!
+}
+
+type QIOIncome {
+	summary: QIOIncome_Summary!
+	activeStreams: [QIOIncome_Stream!]
+	inactiveStreams: [QIOIncome_Stream!]
+	tidsForActiveStreams: [String!]
+}
+
+type QIOIncome_Stream {
+	streamType: String!
+	periodSize: String!
+	identifiedIn: String!
+	dateDistribution: FIORecurringStreamDateDistribution!
+	amountDistribution: FIORecurringStreamAmountDistribution!
+	slug: String!
+	nameFriendly: String!
+	tids: [String!]!
+}
+
+type QIOIncome_Summary {
+	activeDailyEstimate: Float!
+	analyzedAccountMaids: [String!]!
+	oldestActiveStreamStartDate: String
+	analyzedDepositCount: Int!
+}
+
+type QIOInstitution {
+	colors: QIOInstitution_Colors!
+	brand_name: String!
+	brand_subheading: String
+	link_health_status: String!
+	name: String!
+	url: String!
+	url_account_locked: String
+	health_status: String!
+}
+
+type QIOInstitution_Colors {
+	dark: String!
+	darker: String!
+	light: String!
+	primary: String!
+}
+
+type QIOItem_TransactionDetails {
+	latestTransactionAmount: Float!
+	latestTransactionDate: String!
+	latestTransactionName: String!
+	oldestTransactionDate: String!
+	transactionCount: Int!
+}
+
+type QIOMoneyRental {
+	creditCards: QIOMoneyRental_CreditCards
+}
+
+type QIOMoneyRental_CreditCards {
+	accountMaids: [String!]!
+	costOfOneDollar: Float!
+	rent: QIOMoneyRental_CreditCards_Rent!
+	daysAnalyzed: Int!
+	balance: QIOMoneyRental_CreditCards_Balances!
+}
+
+type QIOMoneyRental_CreditCards_Balances {
+	current: QIOMoneyRental_CreditCards_Balances_Current!
+	historical: QIOMoneyRental_CreditCards_Balances_Historical!
+}
+
+type QIOMoneyRental_CreditCards_Balances_Current {
+	total: Float!
+	utilizationPercentage: Float!
+	totalLimit: Float!
+	totalSubjectToLimit: Float!
+	totalEffectiveBalance: Float!
+}
+
+type QIOMoneyRental_CreditCards_Balances_Historical {
+	daysAnalyzed: Int!
+	avgBalance: Float!
+	avgMMCarryOver: Float!
+	MMCarryOvers: [Float!]!
+	dates: [QIOMoneyRental_CreditCards_Balances_Historical_Date!]!
+}
+
+type QIOMoneyRental_CreditCards_Balances_Historical_Date {
+	date: String!
+	balance: Float!
+	utilization: Float!
+}
+
+type QIOMoneyRental_CreditCards_Rent {
+	averagePerDay: Float!
+	dailyPeriodicRate: Float!
+	daysAnalyzed: Int!
+	percentOfDailyNet: Float!
+	totalInAnalysisPeriod: Float!
+}
+
+type QIOSpending {
+	totalAmount: Float!
+	monthsAnalyzed: Int!
+	categories: QIOSpending_Categories!
+	vendorAnalysis: [QIOSpending_VendorAnalysis!]
+	basicLivingExpenses: QIOSpending_BasicLivingExpenses!
+	daily: QIOSpending_Daily!
+	months: [QIOSpending_Month!]!
+	streams: [QIOSpending_RecurringStream!]
+}
+
+type QIOSpending_BasicLivingExpenses {
+	estimatedMonthlyAmount: Float!
+	summary: [QIOSpending_BasicLivingExpenses_Summary!]!
+	months: [QIOSpending_BasicLivingExpenses_Month!]!
+}
+
+type QIOSpending_BasicLivingExpenses_Category {
+	categoryId: String!
+	amount: Float!
+	tids: [String!]
+}
+
+type QIOSpending_BasicLivingExpenses_Month {
+	monthTotal: Float!
+	allTids: [String!]
+	monthStr: String!
+	monthStartDate: String!
+	monthEndDate: String!
+	byCategory: [QIOSpending_BasicLivingExpenses_Category!]
+}
+
+type QIOSpending_BasicLivingExpenses_Summary {
+	categoryId: String!
+	average: Float!
+	friendlyName: String!
+}
+
+type QIOSpending_Categories {
+	startDate: String!
+	endDate: String!
+	total: Float!
+	lookbackDayCount: Int!
+	names: [String!]!
+	amounts: [Float!]!
+	percentages: [Float!]!
+	descriptions: [String!]!
+	tids: [[String!]!]!
+}
+
+type QIOSpending_Daily {
+	averageAmount: Float!
+	daysAnalyzed: Int!
+}
+
+type QIOSpending_Month {
+	month: String!
+	amount: Float!
+}
+
+type QIOSpending_RecurringStream {
+	amountDistribution: FIORecurringStreamAmountDistribution!
+	dateDistribution: FIORecurringStreamDateDistribution!
+	fioCategoryId: Int!
+	nameFriendly: String!
+	periodSize: String!
+	periodsPerYear: Int!
+	streamType: String!
+	transactionCount: Int!
+	tids: [String!]!
+	dates: [String!]!
+}
+
+type QIOSpending_VendorAnalysis {
+	slug: String!
+	name: String!
+	dailyAvg: Float!
+	historicalTwelveMonths: Float!
+	historicalThreeMonths: Float!
+	twelveMonthTids: [String!]!
+	threeMonthTids: [String!]!
+}
+
+type QIOUserHome {
+	items: [FIOItem!]
+	accounts: [FIOFinAccount!]
+	transactionOverview: QIOUserHome_TransactionsOverview
+	spending: QIOSpending
+	moneyRental: QIOMoneyRental
+	income: QIOIncome
+	financialIndependence: QIOFinancialIndependence
+}
+
+type QIOUserHome_TransactionsOverview {
+	oldestTransactionDate: String!
+	totalIn: Float!
+	totalOut: Float!
+	transactionCount: Int!
+}
+
+type Query {
+	deleteUser(dummyArgToAvoidClientCrash: String): Boolean
+	removeItem(item_id: String!): Boolean
+	getUserHome: QIOUserHome
+	getFlowPeriods(
+		windowSize: Int!,
+		periodIdStart: String,
+		periodIdEnd: String,
+		nextToken: String
+	): PaginatedFlowPeriods!
+	getTransactions(transaction_ids: [String], returnSummary: Boolean): [FIOTransaction!]
+	transactionsForAccount(maid: String!): [FIOTransaction!]
+	getItemStatus(item_id: String, link_session_id: String): FIOItemStatus
+	searchTransactions(query: String!): [FIOTransaction!]
+	userAuthExists(phoneNumber: String!): Boolean!
+	getPublicTokenForItem(item_id: String!): String
+	getSubscriptionStatus: FIOSubscriptionVerifyResponse
+	getQuantizeStatus: String
+	hideAccounts(account_ids: [String!], masterAccountIds: [String!], hiddenState: Boolean): Boolean
+	promoCode(promoCode: String): FIOSubscriptionVerifyResponse
+	getInstitution(ins_id: String): QIOInstitution
+	putItem(item: FIOPlaidItemInput!, force: Boolean, isUpdate: Boolean): Boolean
+}
+
+type StepFunctionStartResult {
+	executionArn: String
+	startDate: String
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

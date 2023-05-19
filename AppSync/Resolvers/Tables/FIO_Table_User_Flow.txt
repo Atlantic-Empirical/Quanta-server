@@ -1,0 +1,38 @@
+
+# Request Mapping Template
+
+{
+    "version": "2017-02-28",
+    "operation": "Query",
+    "index": "userId-windowSize-index",
+    "query": {
+        "expression": "userId = :userId AND windowSize = :windowSize",
+        "expressionValues": {
+            ":userId": $util.dynamodb.toDynamoDBJson($ctx.identity.cognitoIdentityId),
+            ##":userId": $util.dynamodb.toDynamoDBJson("us-east-1:0e8b454a-9291-444b-bd99-093d50db01eb"),
+            ":windowSize": $util.dynamodb.toDynamoDBJson($ { ctx.args.windowSize })
+        }
+    },
+    "filter": {
+        "expression": "#periodId BETWEEN :periodIdStart AND :periodIdEnd",
+        "expressionNames": {
+            "#periodId": "periodId"
+        },
+        "expressionValues": {
+            ":periodIdStart": $util.dynamodb.toDynamoDBJson($ { ctx.args.periodIdStart }),
+            ":periodIdEnd": $util.dynamodb.toDynamoDBJson($ { ctx.args.periodIdEnd })
+        }
+    }
+    #if ($ { ctx.args.nextToken }),
+    "nextToken": "${ctx.args.nextToken}"
+    #end
+}
+
+# Response Mapping Template
+
+{
+    "periods": $utils.toJson($context.result.items)
+    #if( ${context.result.nextToken} )
+        ,"nextToken": "${context.result.nextToken}"
+    #end
+}

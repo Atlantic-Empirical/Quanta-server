@@ -1,0 +1,9 @@
+{
+    "FIO-Lambda-Admin-UserLookup": {
+        "lambda": {
+            "userIds": [
+                "us-east-1:d6f855e7-db4f-407a-828e-43c3f4f39849"
+            ]
+        }
+    }
+}

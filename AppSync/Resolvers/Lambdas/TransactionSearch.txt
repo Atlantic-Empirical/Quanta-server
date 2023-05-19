@@ -1,0 +1,15 @@
+
+Request Mapping Template
+
+{
+    "version" : "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+        "userId": $utils.toJson($context.identity.cognitoIdentityId),
+        "args": $utils.toJson($context.arguments)
+    }
+}
+
+Response Mapping Template
+
+$util.toJson($context.result)

@@ -1,0 +1,16 @@
+{
+    "FIO-Lambda-User-Transactions": {
+        "lambda": {
+            "userId": "us-east-1:0e8b454a-9291-444b-bd99-093d50db01eb",
+            "transaction_ids": [
+                "1o77Ywr5LYT36ALym8NOhk8vk7mA8aImJ4DDv"
+            ]
+        }
+    },
+    "QIO-Lambda-ASDS-User-Transactions": {
+        "lambda": {
+            "maid": "ed691679-2f82-4cbb-b3e7-00b77dfb9fcf",
+            "userId": "us-east-1:0e8b454a-9291-444b-bd99-093d50db01eb"
+        }
+    }
+}

@@ -1,0 +1,45 @@
+/*
+ *	HTML5 Device Mockups
+ *
+ *	By:
+ *		Tomi Hiltunen
+ *		tomi@mitakuuluu.fi
+ *		http://fi.linkedin.com/in/tomihiltunen/
+ *
+ *		Angelos Arnis
+ *		http://fi.linkedin.com/in/angelosarnis/
+*/
+
+.device-mockup {
+	position: relative;
+	width: 100%;
+	padding-bottom: 61.775701%;
+}
+
+.device-mockup>.device {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+.device-mockup.iphone6_plus {
+	padding-bottom: 201.76%;
+}
+
+.device-mockup.iphone6_plus>.spendingScreen {
+	background-image: url("websiteMainScreen.png");
+}
+
+.device-mockup.iphone6_plus>.flowScreen {
+	background-image: url("websiteFlowScreen.png");
+}
+
+.device-mockup.iphone6_plus>.fireScreen {
+	background-image: url("websiteFireScreen.png");
+}

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$*" = "" ]; then
+    echo "Commit message is required."
+    exit 0
+else
+    echo "git add -A"
+    git add -A
+    echo "git commit -m "$*""
+    git commit -m "$*"
+    git status
+    echo 'Done.'
+    exit 1
+fi

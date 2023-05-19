@@ -1,0 +1,84 @@
+#!/bin/bash
+LambdaRoot="/home/ec2-user/environment/Lambda"
+
+git status
+
+echo -n "WHICH? 'qlib', 'qfin', 'qplaid', 'thirdparty', or 'all [ENTER]: "
+read which
+
+if [ $which == "q" ] || [ "$which" = "x" ]; then
+    echo "Cancelled."
+    exit 0
+    
+elif [ "$which" == "qlib" ] || [ "$which" == "all" ]; then
+    srcPath="$LambdaRoot/_QLibs/QuantaLib"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaLib' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%QuantaLib} #strips the QuantaLib directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaLib files
+    done
+    echo "Done."
+    exit 0
+    
+elif [ "$which" == "qfin" ] || [ "$which" == "all" ]; then
+    srcPath="$LambdaRoot/_QLibs/QuantaFin"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaFin' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%QuantaFin} #strips the QuantaFin directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaFin files
+    done
+    echo "Done."
+    exit 0
+    
+elif [ "$which" == "qplaid" ] || [ "$which" == "all" ]; then
+    srcPath="$LambdaRoot/_QLibs/QuantaPlaid"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaPlaid' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            # echo $dirName
+        
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+
+            targetDir=${dirName%QuantaPlaid} #strips the QuantaLib directory off the end to make it put QL in the right place
+            echo $targetDir
+            
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaPlaid files
+    done
+    echo "Done."
+    exit 0
+    
+elif [ "$which" == "thirdparty" ] || [ "$which" == "all" ]; then
+    srcPath="$LambdaRoot/_QLibs/ThirdParty"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/ThirdParty' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            # echo $dirName
+        
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+
+            targetDir=${dirName%ThirdParty} #strips the ThirdParty directory off the end to make it put QL in the right place
+            echo $targetDir
+            
+            cp -rfu $srcPath $targetDir # Copy in the updated ThirdParty files
+    done
+    echo "Done."
+    exit 0
+    
+else
+    echo "Unrecognized input."
+    
+fi

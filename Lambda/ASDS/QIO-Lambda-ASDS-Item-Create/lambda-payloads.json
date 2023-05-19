@@ -1,0 +1,22 @@
+{
+    "QIO-Lambda-ASDS-Item-Create": {
+        "lambda": {
+            "userId": "us-east-1:0e8b454a-9291-444b-bd99-093d50db01eb",
+            "args": {
+                "item": {
+                    "metadata": {
+                        "status": "connected",
+                        "request_id": "s4XYXAyW66WAp5W",
+                        "institution": {
+                            "name": "American Express",
+                            "institution_id": "ins_10"
+                        }
+                    },
+                    "linkSessionId": "1f257f29-e1ce-4cc7-85a5-25c5bde4a381",
+                    "token": "public-development-02da4815-093f-4e4a-b37c-9c191c7499a6"
+                },
+                "isUpdate": true
+            }
+        }
+    }
+}

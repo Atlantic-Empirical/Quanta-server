@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  QIO-Lambda-Auth-CognitoTrigger:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: ''
+      Handler: index.handler
+      MemorySize: 128
+      Role: 'arn:aws:iam::475512417340:role/Role-Chedda-Lambda'
+      Runtime: nodejs8.10
+      Timeout: 3

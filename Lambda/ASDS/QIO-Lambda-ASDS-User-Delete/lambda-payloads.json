@@ -1,0 +1,13 @@
+{
+    "FIO-Lambda-User-Delete": {
+        "lambda": {
+            "username": ""
+        }
+    },
+    "QIO-Lambda-ASDS-User-Delete": {
+        "lambda": {
+            "username": "+17263269002",
+            "userId": "us-east-1:b6fd04e2-fa26-4f55-8957-14de2e2f2b02"
+        }
+    }
+}

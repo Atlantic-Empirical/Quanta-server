@@ -1,0 +1,16 @@
+{
+    "FIO-Lambda-Notifs-Device-Add": {
+        "lambda": {
+            "userId": "us-east-1:d6f855e7-db4f-407a-828e-43c3f4f39849",
+            "token": "7d0f3be283245ff43bf587a3b31fc6820c24c45a4c3640e32847a54808bc3c7c",
+            "platform": "as"
+        }
+    },
+    "QIO-Lambda-ASDS-User-Notifs-Device-Update": {
+        "lambda": {
+            "userId": "us-east-1:9da31947-efc6-4189-8af2-1509c065e6f0",
+            "token": "488f6a6d61eaf7f6b321be785736aba45205bba300b079269824c9c15ab1e773",
+            "platform": "a"
+        }
+    }
+}

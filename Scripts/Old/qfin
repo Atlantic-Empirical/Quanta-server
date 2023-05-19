@@ -1,0 +1,23 @@
+#!/bin/bash
+git status
+echo -n "DO THIS? Think hard before typing 'yesqlib' or 'no' [ENTER]: "
+read yesNo
+if  [ $yesNo == "yesqfin" ]; then
+    LambdaRoot="/home/ec2-user/environment/Lambda"
+    srcPath="$LambdaRoot/!QLibs/QuantaFin"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaFin' -type d -not -path '*/!QLibs*' | 
+        while read dirName; do 
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%QuantaFin} #strips the QuantaFin directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaFin files
+    done
+    echo "Done."
+    exit 0
+else
+    echo "Cancelled."
+    exit 0
+fi

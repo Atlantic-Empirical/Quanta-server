@@ -1,0 +1,110 @@
+#!/bin/bash
+LambdaRoot="/home/ec2-user/environment/Lambda"
+
+echo ""
+echo "> qgather"
+qgather
+
+echo -n "PERFORM GATHER? yes or no [ENTER]: "
+read yesNo
+
+if  [ "$yesNo" == "yes" ]; then
+    echo "> qgather-x"
+    qgather-x
+    echo ""
+    echo "> git status"
+    git status
+    echo ""
+fi
+
+echo -n "PEFORM DISTRIBUTE? yes/no [ENTER]: "
+read yesNo
+
+if  [ "$yesNo" == "yes" ]; then
+
+    # SPREAD QUANTA*LIB AROUND
+    echo "Starting QuantaLib"
+    srcPath="$LambdaRoot/_QLibs/QuantaLib"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaLib' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%QuantaLib} #strips the QuantaLib directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaLib files
+    done
+    echo "Done with QuantaLib."
+    echo""
+    
+    # SPREAD QUANTA*FIN AROUND
+    echo "Starting QuantaFin"
+    srcPath="$LambdaRoot/_QLibs/QuantaFin"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaFin' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%QuantaFin} #strips the QuantaFin directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaFin files
+    done
+    echo "Done with QuantaFin."
+    echo""
+    
+    # SPREAD QUANTA*PLAID AROUND
+    echo "Starting QuantaPlaid"
+    srcPath="$LambdaRoot/_QLibs/QuantaPlaid"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/QuantaPlaid' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            # echo $dirName
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%QuantaPlaid} #strips the QuantaLib directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated QuantaPlaid files
+    done
+    echo "Done with QuantaPlaid."
+    echo""
+    
+    # SPREAD THIRD PARTY AROUND
+    echo "Starting ThirdParty"
+    srcPath="$LambdaRoot/_QLibs/ThirdParty"
+    echo "Source path = $srcPath"
+    echo "Target Dirs:"
+    find $LambdaRoot -path '*/ThirdParty' -type d -not -path '*/_QLibs*' | 
+        while read dirName; do 
+            # echo $dirName
+            rm -rf $dirName # smash the old version
+            mkdir $dirName # create a new target directory
+            targetDir=${dirName%ThirdParty} #strips the ThirdParty directory off the end to make it put QL in the right place
+            echo $targetDir
+            cp -rfu $srcPath $targetDir # Copy in the updated ThirdParty files
+    done
+    echo "Done with third party."
+    echo ""
+    echo "SUCCESS!"
+fi
+
+echo ""
+gs
+echo ""
+
+echo -n "PERFORM git add commit push (gacp)? yes or no [ENTER]: "
+read yesNo
+if  [ "$yesNo" != "yes" ]; then
+    echo "Done."
+    exit 0
+fi
+echo -n "Commit message [ENTER]: "
+read commitMsg
+if  [ "$commitMsg" == "" ]; then
+    echo "Commit message is required. Exiting. Do it yourself...."
+    exit 0
+fi
+( gacp "$commitMsg" )
+exit 0

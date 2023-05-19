@@ -1,0 +1,115 @@
+{
+    "FACTriagePlaidWebhook": {
+        "lambda": {
+            "resource": "/fac/hook",
+            "path": "/fac/hook",
+            "httpMethod": "POST",
+            "headers": {
+                "Accept-Encoding": "gzip",
+                "CloudFront-Forwarded-Proto": "https",
+                "CloudFront-Is-Desktop-Viewer": "true",
+                "CloudFront-Is-Mobile-Viewer": "false",
+                "CloudFront-Is-SmartTV-Viewer": "false",
+                "CloudFront-Is-Tablet-Viewer": "false",
+                "CloudFront-Viewer-Country": "US",
+                "content-type": "application/json",
+                "Host": "api-dev.chedda.io",
+                "User-Agent": "Go-http-client/2.0",
+                "Via": "2.0 5fd20d9d15ca3dbd41ebba7c2495fd98.cloudfront.net (CloudFront)",
+                "X-Amz-Cf-Id": "5RtVoLrYdHRUQDj1lplvpUa1zgfUBJQV-YKRcHX94XXajEXxvYt2-A==",
+                "X-Amzn-Trace-Id": "Root=1-5c7b9666-4d0c06883e0a70a07e419178",
+                "X-Forwarded-For": "52.21.26.131, 54.239.145.80",
+                "X-Forwarded-Port": "443",
+                "X-Forwarded-Proto": "https"
+            },
+            "multiValueHeaders": {
+                "Accept-Encoding": [
+                    "gzip"
+                ],
+                "CloudFront-Forwarded-Proto": [
+                    "https"
+                ],
+                "CloudFront-Is-Desktop-Viewer": [
+                    "true"
+                ],
+                "CloudFront-Is-Mobile-Viewer": [
+                    "false"
+                ],
+                "CloudFront-Is-SmartTV-Viewer": [
+                    "false"
+                ],
+                "CloudFront-Is-Tablet-Viewer": [
+                    "false"
+                ],
+                "CloudFront-Viewer-Country": [
+                    "US"
+                ],
+                "content-type": [
+                    "application/json"
+                ],
+                "Host": [
+                    "api-dev.chedda.io"
+                ],
+                "User-Agent": [
+                    "Go-http-client/2.0"
+                ],
+                "Via": [
+                    "2.0 5fd20d9d15ca3dbd41ebba7c2495fd98.cloudfront.net (CloudFront)"
+                ],
+                "X-Amz-Cf-Id": [
+                    "5RtVoLrYdHRUQDj1lplvpUa1zgfUBJQV-YKRcHX94XXajEXxvYt2-A=="
+                ],
+                "X-Amzn-Trace-Id": [
+                    "Root=1-5c7b9666-4d0c06883e0a70a07e419178"
+                ],
+                "X-Forwarded-For": [
+                    "52.21.26.131, 54.239.145.80"
+                ],
+                "X-Forwarded-Port": [
+                    "443"
+                ],
+                "X-Forwarded-Proto": [
+                    "https"
+                ]
+            },
+            "queryStringParameters": null,
+            "multiValueQueryStringParameters": null,
+            "pathParameters": null,
+            "stageVariables": null,
+            "requestContext": {
+                "resourceId": "rqd80d",
+                "resourcePath": "/fac/hook",
+                "httpMethod": "POST",
+                "extendedRequestId": "V9RwBGhmIAMFe1w=",
+                "requestTime": "03/Mar/2019:08:55:02 +0000",
+                "path": "/fac/hook",
+                "accountId": "475512417340",
+                "protocol": "HTTP/1.1",
+                "stage": "Development",
+                "domainPrefix": "api-dev",
+                "requestTimeEpoch": 1551603302511,
+                "requestId": "084a30e7-3d92-11e9-a2c0-e3b3d6baf389",
+                "identity": {
+                    "cognitoIdentityPoolId": null,
+                    "accountId": null,
+                    "cognitoIdentityId": null,
+                    "caller": null,
+                    "sourceIp": "52.21.26.131",
+                    "accessKey": null,
+                    "cognitoAuthenticationType": null,
+                    "cognitoAuthenticationProvider": null,
+                    "userArn": null,
+                    "userAgent": "Go-http-client/2.0",
+                    "user": null
+                },
+                "domainName": "api-dev.chedda.io",
+                "apiId": "kzcvrr9lol"
+            },
+            "body": "{\n  \"error\": null,\n  \"item_id\": \"xQDwpxaVvYixRkB6gzZeIBmoAn5jpEUM706xQ\",\n  \"removed_transactions\": [\n    \"mQv4b3BXnxi3pgYNkDLqHJ8ZEgpm6KfMP3NK4\",\n    \"qN4xVAkZv5SQJZ9kpEz5C9L7nDxoDEHJjDMeR\"\n  ],\n  \"webhook_code\": \"TRANSACTIONS_REMOVED\",\n  \"webhook_type\": \"TRANSACTIONS\"\n}",
+            "isBase64Encoded": false
+        }
+    },
+    "QIO-Lambda-HookHandler-Plaid": {
+        "lambda": {}
+    }
+}

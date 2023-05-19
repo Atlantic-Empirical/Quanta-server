@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Branch -->
+  <script type="text/javascript">
+    (function(b, r, a, n, c, h, _, s, d, k) {
+      if (!b[n] || !b[n]._q) {
+        for (; s < _.length;) c(h, _[s++]);
+        d = r.createElement(a);
+        d.async = 1;
+        d.src = "https://cdn.branch.io/branch-latest.min.js";
+        k = r.getElementsByTagName(a)[0];
+        k.parentNode.insertBefore(d, k);
+        b[n] = h;
+      }
+    })(window, document, "script", "branch", function(b, r) { b[r] = function() { b._q.push([r, arguments]) } }, { _q: [], _v: 1 }, "addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
+
+    branch.init('key_live_lpKvvcylbTvzv2P4c1slcdjfxxmgaQgB');
+
+    function sendSMS(form) {
+      var phone = form.phone.value;
+      var linkData = {
+        tags: [],
+        channel: 'Website',
+        feature: 'TextMeTheApp',
+        data: {
+          'foo': 'bar'
+        }
+      };
+      var options = {};
+      var callback = function(err, result) {
+        if (err) {
+          alert("Sorry, something went wrong.");
+        }
+        else {
+          alert("SMS sent!");
+        }
+      };
+      branch.sendSMS(phone, linkData, options, callback);
+      form.phone.value = "";
+    }
+  </script>
+
+  <!-- Cache Control -->
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Flow Capital, LLC.">
+
+  <title>Quanta Money</title>
+
+  <!-- Favico -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favico/favicon-16x16.png">
+  <link rel="manifest" href="favico/site.webmanifest">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="device-mockups/device-mockups.css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/new-age.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- NAVIGATION -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Quanta</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="https://get.quantamoney.app">Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-7 my-auto">
+          <div class="header-content mx-auto homeMainText">
+            <h1 class="mb-4" style="font-weight: 700;">Quanta is your ally on the path to financial freedom.</h1>
+            <h3 class="mb-4 homeMainTextSub">Helping you come out ahead by delivering judgment-free information about your money in a refreshing new way, everyday.</h3>
+            <div class="mb-4">
+              <a href="https://get.quantamoney.app"><img src="img/app-store-badge.svg" width="240" height="auto" alt=""></a>
+            </div>
+            <form onsubmit="sendSMS(this); return false;">
+              <div class="form-group" style="display: inline-block;">
+                <label for="phone" class="form-text text-muted">Or text yourself a link:</label>
+                <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" class="form-control form-control-lg" aria-describedby="phoneHelp" />
+                <small id="phoneHelp" class="form-text text-muted">Your # will be used once and is not stored.</small>
+              </div><br>
+              <input type="submit" class="btn btn-outline btn-xl" style="background-color: black;" value="Send link" />
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-5 my-auto">
+          <div class="device-container">
+            <div class="device-mockup iphone6_plus">
+              <div class="device spendingScreen">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROFITABLE LIVING -> FINANCIAL FREEDOM -->
+  <section class="download bg-black text-center" id="features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <h3 class="section-heading">Profitable Living → Financial Freedom</h3>
+          <h4>
+            Know your numbers.<br>Get and stay profitable.<br>Build your independence.<br>
+          </h4>
+          <div class="mb-5">
+            <p>
+              <h4>Quanta makes it easy to see how it’s going daily, weekly and monthly. Companies know if they are operating at a surplus or a deficit, now you can too.</h4>
+            </p>
+          </div>
+          <a href="https://get.quantamoney.app"><img src="img/app-store-badge.svg" width="240" height="auto" alt=""></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHTFUL -->
+  <section class="features" id="insightful">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 my-auto">
+          <div class="device-container">
+            <div class="device-mockup iphone6_plus">
+              <div class="device flowScreen">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 my-auto">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="text-center mb-3">
+                  <h2>Insightful.</h2>
+                  <p>
+                    <h4>When it comes to your money <i>Knowledge Is Power</i>.</h4>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-minus text-primary"></i>
+                  <h3>Spending</h3>
+                  <p class="text-muted">Know where your money really goes across categories, recurring expenses, base expenses, and recipients.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-plus text-primary"></i>
+                  <h3>Income</h3>
+                  <p class="text-muted">Know much you actually take home every day.</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-chart text-primary"></i>
+                  <h3>Profitability</h3>
+                  <p class="text-muted">Know whether you’re living profitably any given day, week, or month. Dig in to see money in/out in any period.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-fire text-primary"></i>
+                  <h3>Independence</h3>
+                  <p class="text-muted">See your big financial picture with savings buffer, Savings Rate, and Safe Withdrawal Rate.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURE -->
+  <section class="download bg-black text-center" id="reliable">
+    <div class="container">
+      <div class="text-center">
+        <h2>Secure.</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div class="mb-5">
+            <p>
+              <h4>Designed from the start to protect your financial information, Quanta securely imports transactions then runs our unique 'quantization' process to deliver a totally new perspective on your money. Just connect your accounts and Quanta does
+                the rest.</h4>
+            </p>
+          </div>
+          <div class="mb-5">
+            <p><a href="secureAndPrivate.html" class="btn btn-outline btn-xl">Security & Privacy at Quanta</a></p>
+            <p><a href="howQuantaWorks.html" class="btn btn-outline btn-xl js-scroll-trigger">How Quanta Works</a></p>
+          </div>
+          <div class="badges">
+            <a class="badges badge-link" href="#"><img src="img/app-store-badge.svg" alt=""></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIGHTFUL -->
+  <section class="features" id="delightful">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 my-auto">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="text-center mb-5">
+                  <h2>Delightful.</h2>
+                  <p>
+                    <h4>Money doesn't need to be totally terrifying.</h4>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-like text-primary"></i>
+                  <h3>Easy</h3>
+                  <p class="text-muted">No data entry! Once your accounts are connected Quanta does all the work for you every night while you sleep.</p>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="feature-item">
+                  <i class="icon-rocket text-primary"></i>
+                  <h3>Fun</h3>
+                  <p class="text-muted">Knowledge is power and control is fun. Whatever your financial situation, with focus on progress money becomes a fun and rewarding game to play.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 my-auto">
+          <div class="device-container">
+            <div class="device-mockup iphone6_plus">
+              <div class="device fireScreen">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2x4 -->
+  <section class="download bg-black text-center" id="2x4">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="mb-3">The Quanta 2x4.</h2>
+        <div class="col-md-10 mx-auto">
+          <h4>See your key numbers right up front and dive in for more perspective and details on the transactions, calculations, and categorizations that result in your current figures.</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/Summary.png" class="twoByFour" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/Flow.png" class="twoByFour" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/Income.png" class="twoByFour" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/Spending.png" class="twoByFour" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/Surplus.png" class="twoByFour" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/MoneyRental.png" class="twoByFour" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/RainyDay.png" class="twoByFour" />
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="feature-item">
+                <img src="img/Bullion/Independence.png" class="twoByFour" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW NOTIF -->
+  <section class="download bg-white text-center" id="flowNotif">
+    <div class="container">
+      <div class="mb-4">
+        <img src="img/websiteFlowNotif.png" class="notifImg" />
+      </div>
+      <div class="mb-4">
+        <h2>One Notification Per Day.</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <h4>Every morning Quanta lets you know how yesterday turned out. Did you come out up or down? It is your secret weapon against casual spending and helps keep you on track.</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div style="text-align: center;">
+        <h5 class="mb-3 footerTag"><i>Quanta empowers you to live a more intentional financial life and make better decisions about how you earn, spend, and save your money.</i></h5>
+      </div>
+      <a href="https://get.quantamoney.app"><img src="img/app-store-badge.svg" width="150" height="auto" alt="" class="mb-4" /></a>
+      <p>&copy; 2019 Flow Capital, LLC. All Rights Reserved.</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="secureAndPrivate.html">Privacy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="termsOfService.html">Terms</a>
+        </li>
+        <!-- <li class="list-inline-item">
+          <a href="faq.html">FAQ</a>
+        </li> -->
+        <li class="list-inline-item">
+          <a href="about.html">About</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/new-age.js"></script>
+
+</body>
+
+</html>

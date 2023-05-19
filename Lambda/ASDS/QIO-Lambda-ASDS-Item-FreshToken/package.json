@@ -1,0 +1,17 @@
+{
+  "name": "FIO-Lambda-Item-NewPublicToken",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "plaid": "^2.10.0",
+    "rollbar": "^2.5.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

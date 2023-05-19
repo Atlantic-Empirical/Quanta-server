@@ -1,0 +1,12 @@
+{
+    "QIO-Lambda-Nightly-User-Quantize": {
+        "lambda": {
+            "userId": "us-east-1:9da31947-efc6-4189-8af2-1509c065e6f0",
+            "skipNotify": true,
+            "pullFullTransactionHistory": false
+        }
+    },
+    "": {
+        "lambda": {}
+    }
+}

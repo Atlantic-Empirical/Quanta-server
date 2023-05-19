@@ -1,0 +1,37 @@
+{
+    "QIO-Lambda-Auth-CognitoTrigger": {
+        "lambda": {
+            "version": "1",
+            "region": "us-east-1",
+            "userPoolId": "us-east-1_qEX0vG1or",
+            "userName": "cf3bbc12-2b26-40b1-ad8d-a1282a9ef167",
+            "callerContext": {
+                "awsSdkVersion": "aws-sdk-ios-2.9.3",
+                "clientId": "31e5o79uonr6akuuei697li5s0"
+            },
+            "triggerSource": "CreateAuthChallenge_Authentication",
+            "request": {
+                "userAttributes": {
+                    "sub": "cf3bbc12-2b26-40b1-ad8d-a1282a9ef167",
+                    "cognito:user_status": "CONFIRMED",
+                    "phone_number_verified": "false",
+                    "cognito:phone_number_alias": "+17263269000",
+                    "phone_number": "+17263269000"
+                },
+                "challengeName": "CUSTOM_CHALLENGE",
+                "session": [
+                    {
+                        "challengeName": "SRP_A",
+                        "challengeResult": true,
+                        "challengeMetadata": null
+                    }
+                ]
+            },
+            "response": {
+                "publicChallengeParameters": null,
+                "privateChallengeParameters": null,
+                "challengeMetadata": null
+            }
+        }
+    }
+}

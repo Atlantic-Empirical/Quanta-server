@@ -1,0 +1,27 @@
+
+Request Mapping Template
+
+{
+    "version": "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+
+        #if ($context.identity.cognitoIdentityId)
+            "userId": $util.toJson($context.identity.cognitoIdentityId),
+
+        #elseif($context.args.userId)
+            "userId": $util.toJson($context.args.userId),
+        
+        #else
+            "userId": $util.toJson("Not provided"),
+        #end 
+        
+        "transaction_ids": $util.toJson($context.args.transaction_ids)
+    }
+}
+
+
+
+Response Mapping Template
+
+$util.toJson($context.result)

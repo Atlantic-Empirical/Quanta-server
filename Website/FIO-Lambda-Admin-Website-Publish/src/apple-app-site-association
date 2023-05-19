@@ -1,0 +1,14 @@
+{
+   "webcredentials": {
+       "apps": ["DF6322ZN6F.app.flow.FlowiOS"]
+    },
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "DF6322ZN6F.app.flow.FlowiOS",
+                "paths": ["/testUniversalLink"]
+            }
+        ]
+    }    
+}

@@ -1,0 +1,20 @@
+{
+    "FIO-Lambda-Item-NewPublicToken": {
+        "lambda": {
+            "item_id": "Oge4o47aP1Fw8gnbQzKEFqDaegNk3zU8R0qZR",
+            "userId": "us-east-1:b86a734a-9295-4a2e-a835-1f6846636d26"
+        }
+    },
+    "QIO-Lambda-ASDS-Item-FreshToken": {
+        "lambda": {
+            "access_token": "access-development-c00faaab-571f-45ce-a294-da639afec5f8",
+            "env": "development",
+            "institution_id": "ins_9",
+            "institution_name": "Capital One",
+            "item_id": "QY3eng79dyCvAAmRENmyHA0Yj7P5aVIEABKqd",
+            "lastTransactionPull": 1551861076165,
+            "transactionPullBatchCount": 0,
+            "userId": "us-east-1:14a9a898-42e2-47dd-9f8c-de9fa33dacf4"
+        }
+    }
+}

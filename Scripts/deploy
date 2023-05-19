@@ -1,0 +1,70 @@
+#!/bin/bash
+
+FORCE=false
+
+while getopts f option
+do
+    case "${option}"
+    in
+    f) FORCE=true;;
+    esac
+done
+echo "Will force: "$FORCE""
+
+DEPLOY_ZIP_DIR="/home/ec2-user/deploys/"
+
+if [ -z "$(git status --porcelain)" ]; then
+    echo "Repo is clean"
+    echo -n "DEPLOY? Think hard before typing 'yesdeploy' or 'no' [ENTER]: "
+    read yesNo
+    if  [ $yesNo == "yesdeploy" ]; then
+        echo "SKIP: zip was unchanged from previous run"
+        LambdaRoot="/home/ec2-user/environment/Lambda"
+        # echo "Deploy Paths:"
+        find $LambdaRoot -path '*/index.js' -type f -not -path '*node_modules*' -not -path '*_QLibs*' -not -path '*ThirdParty*' | 
+            while read pathName; do 
+                # echo $pathName
+                
+                sourceDir=${pathName%'/index.js'} # strips the /index.js off the end
+                # echo $sourceDir
+                
+                cd $sourceDir
+    
+                lambdaName=$(basename $sourceDir)
+                # echo $lambdaName
+                
+                tempZipFileName="$lambdaName.zip"
+                # echo $tempZipFileName
+    
+                tempZipPath="$DEPLOY_ZIP_DIR$tempZipFileName"
+                # echo $tempZipPath
+    
+                zipResult=$(zip -FS $tempZipPath -r ./* -x $tempZipFileName)
+    
+                if [ "$zipResult" == "Archive is current" ] && [ "$FORCE" != true ]; then
+                    # echo $zipResult
+                    echo "SKIPPING $lambdaName"            
+                else
+                    echo "="
+                    echo "=="
+                    echo "==="
+                    echo "PUBLISHING $lambdaName"
+                    aws lambda update-function-code --function-name $lambdaName --zip-file fileb://$tempZipPath
+                    echo "DONE with $lambdaName"
+                    echo "==="
+                    echo "=="
+                    echo "="
+                fi
+                cd - > /dev/null
+        done
+        echo "Complete."
+        exit 0
+    else
+        echo "Cancelled."
+        exit 0
+    fi
+else 
+    echo "Repo is dirty. We don't deploy like that. [ENTER]"
+    read gotIt
+    git status
+fi

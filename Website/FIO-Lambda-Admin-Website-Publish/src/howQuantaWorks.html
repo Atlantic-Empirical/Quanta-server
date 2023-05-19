@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Cache Control -->
+  <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+  <meta http-equiv="cache-control" content="max-age=0" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="pragma" content="no-cache" />
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Quanta Money - How Quanta Works</title>
+
+  <!-- Favico -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favico/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favico/favicon-16x16.png">
+  <link rel="manifest" href="favico/site.webmanifest">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="device-mockups/device-mockups.css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/new-age.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" class="detailBody">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">Quanta</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="https://get.quantamoney.app">Download</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="faq.html">FAQ</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="bg-primary mainContentDynamicHeight">
+
+    <div class="container col-lg-8">
+
+      <div class="section-heading text-center">
+        <h2>How Quanta Works</h2>
+        <p>Bank Connections & Data Processing</p>
+        <hr><br>
+      </div>
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+
+          <p>Quanta gives you a simple yet totally new way of seeing and thinking about your money.</p>
+
+          <p>In order to accomplish this without you having to enter any data the Quanta system securely imports your transaction history directly from your bank(s) and credit card(s) then performs a proprietary analysis that outputs your unique financial
+            summary.
+          </p>
+
+          <p>That’s the short version, a detailed explanation of how Quanta works follows.</p>
+
+          <h2 id="toc_0">BANK CONNECTION</h2>
+
+          <p>This is what happens when you go through the steps to link your account(s) with Quanta:</p>
+
+          <ol>
+            <li>
+              <p>The app will show you a list of banks / credit card companies and you choose yours.</p>
+            </li>
+            <li>
+              <p>Your bank will ask you to sign-in using your username and password. Possibly you’ll need to do an additional verification via text or email. This process is completely isolated from Quanta and happens between you and your bank. <strong>QUANTA NEVER SEES YOUR BANK CREDENTIALS</strong></p>
+            </li>
+            <li>
+              <p>Once signed-in successfully, your bank tells Quanta “Ok, good to go” and the system kicks off the import of your transaction history.</p>
+            </li>
+          </ol>
+
+          <h2 id="toc_1">TRANSACTION IMPORT</h2>
+
+          <p>Most banks and credit card companies provide 6 to 24 months of transaction history. Quanta imports data back as far as it is available via your financial institution.</p>
+
+          <p>The transactions are imported from your bank to Quanta over a secure connection entirely in the cloud. The transactions are never sent in their entirety to your phone.</p>
+
+          <p>When the system gets a transaction from your bank it has the following information, for example:</p>
+
+          <pre>
+            <code class="language-json">
+              {
+                &quot;account_id&quot;: &quot;KjqYzgz5ZxF1akPV33kLuxdm5VNaNXIQQJx44&quot;,
+                &quot;amount&quot;: 128.64,
+                &quot;category&quot;: [
+                    &quot;Shops&quot;
+                ],
+                &quot;date&quot;: &quot;2019-01-06&quot;,
+                &quot;institution_id&quot;: &quot;ins_10&quot;,
+                &quot;iso_currency_code&quot;: &quot;USD&quot;,
+                &quot;location&quot;: {
+                    &quot;address&quot;: &quot;PO BOX 81226&quot;,
+                    &quot;city&quot;: &quot;Seattle&quot;,
+                    &quot;state&quot;: &quot;WA&quot;
+                },
+                &quot;name&quot;: &quot;Amazon&quot;,
+                &quot;payment_meta&quot;: {
+                    &quot;reference_number&quot;: &quot;320190070329715027&quot;
+                },
+                &quot;pending&quot;: false,
+                &quot;transaction_id&quot;: &quot;00vXpjp59gUb3V1xDDV7cgoBA17yyzFrKgZPg&quot;,
+                &quot;transaction_type&quot;: &quot;place&quot;
+              }
+            </code>
+          </pre>
+
+          <p>And sometimes a transaction comes with a field called “account_owner”. When a transaction shows up with this field, Quanta tosses it out immediately, before ever storing it.</p>
+
+          <p>Additionally, Quanta tosses out the “location” data. We’ve designed the system to do this to protect your privacy. You can read more about our philosophy and approach to privacy and security elsewhere in the app but the key point to know is
+            that we store as little data as possible and dissociate personally identifiable information from financial data as much as possible.</p>
+
+          <p>Quanta only has the ‘window’ into your finances that you offer through the bank connections you make. Quanta does not have visibility into any retirement account withholdings (eg 401k) from your paycheck or employee stock programs or other such
+            ‘savings’ activities.</p>
+
+          <h2 id="toc_2">QUANTA FINANCIAL DATA PROCESSING</h2>
+
+          <p>Once all your transactions are imported, often they number in the thousands, Quanta’s financial intelligence uses algorithms to determine:</p>
+
+          <ul>
+            <li>How much money you make</li>
+            <li>What recurring spending ‘streams’ you have</li>
+            <li>Where your money goes across categories</li>
+            <li>How much your credit cards are really costing</li>
+            <li>What your savings rate is</li>
+            <li>Much more...</li>
+          </ul>
+
+          <h2 id="toc_3">EVERY MORNING, VERY EARLY</h2>
+
+          <p>Banks and other financial institutions settle up their books each night and your new transactions for the day are made available to Quanta. The new transactions are securely imported into the Quanta system and your financial profile is updated
+            by the algorithms mentioned in the previous section.</p>
+
+          <p>This activity culminates in the sending of a single push notification to you that includes just the most essential facts about your financial activity of the previous day -- was it a surplus or deficit? How much so? How many transactions and
+            how much in / out. And finally, where do you stand on the month? Are you headed for a monthly profit or loss?</p>
+
+          <p>Swipe this notif to dive into the app and the details.</p>
+
+          <h2 id="toc_4">WEEKLY &amp; MONTHLY</h2>
+
+          <p>In addition to the daily notification, Quanta will send you weekly and monthly recaps. These three touch points should enable you to get really familiar with where your money is going, and if you’re inclined to make any changes, Quanta’s summaries
+            are a great place to get started in identifying the high-leverage opportunities to sharpen up your financial life.</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div style="text-align: center;">
+        <h5 class="mb-3 footerTag"><i>Quanta empowers you to live a more intentional financial life and make better decisions about how you earn, spend, and save your money.</i></h5>
+      </div>
+      <a href="https://get.quantamoney.app"><img src="img/app-store-badge.svg" width="150" height="auto" alt="" class="mb-4" /></a>
+      <p>&copy; 2019 Flow Capital, LLC. All Rights Reserved.</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="secureAndPrivate.html">Privacy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="termsOfService.html">Terms</a>
+        </li>
+        <!-- <li class="list-inline-item">
+          <a href="faq.html">FAQ</a>
+        </li> -->
+        <li class="list-inline-item">
+          <a href="about.html">About</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/new-age.js"></script>
+
+</body>
+
+</html>

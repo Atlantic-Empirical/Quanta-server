@@ -1,0 +1,14 @@
+{
+    "FIO-Lambda-User-Auth-Exists": {
+        "lambda": {
+            "args": {
+                "phoneNumber": "+17263269001"
+            }
+        }
+    },
+    "QIO-Lambda-ASDS-User-AuthExists": {
+        "lambda": {
+            "phoneNumber": "+19195991988"
+        }
+    }
+}

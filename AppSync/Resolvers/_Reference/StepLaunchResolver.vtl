@@ -1,0 +1,15 @@
+#**
+  The value of 'payload' after the template has been evaluated 
+  will be passed as the event to AWS Lambda.
+*#
+{
+    "version" : "2017-02-28",
+    "operation": "Invoke",
+    "payload": {
+    	"stepInput": {
+            "userId": $util.toJson($context.identity.cognitoIdentityId),
+        	"item_id": $util.toJson($context.args.item_id)
+        },
+        "stepArn": "arn:aws:states:us-east-1:475512417340:stateMachine:FIO-Step-Item-Delete"
+    }
+}

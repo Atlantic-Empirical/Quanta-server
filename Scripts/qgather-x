@@ -1,0 +1,183 @@
+#!/bin/bash
+#
+# NOTES
+#   * Do not create, delete, or change names of files or directories outside of _QLibs ** THAR BE DRAGONS **
+#   * https://download.samba.org/pub/rsync/rsync.html
+#   * see utilized param definitions at bottom of file
+#
+
+LAMBDA_ROOT="/home/ec2-user/environment/Lambda"
+RSYNC_BASE_PARAMS="-acuO" # See reference at bottom of file
+TARGET_ROOT="$LAMBDA_ROOT/_QLibs"
+PLAID_DIR_NAME="/QuantaPlaid"
+FIN_DIR_NAME="/QuantaFin"
+LIB_DIR_NAME="/QuantaLib"
+
+echo ""
+echo "QLIBS GATHER -- Mutate"
+echo "Overall target Root = $TARGET_ROOT"
+echo ""
+echo ">>>> QUANTA PLAID <<<<"
+find $LAMBDA_ROOT -path "*$PLAID_DIR_NAME" -type d -not -path "*/_QLibs*" | 
+    while read sourceDir; do
+    RSYNC_MUTATE_COMMAND=( rsync $RSYNC_BASE_PARAMS $sourceDir $TARGET_ROOT )
+    "${RSYNC_MUTATE_COMMAND[@]}" # Runs command
+done
+echo "<<<< DONE WITH QUANTA PLAID >>>>"
+echo ""
+echo ">>>> QUANTA FIN <<<<"
+find $LAMBDA_ROOT -path "*$FIN_DIR_NAME" -type d -not -path "*/_QLibs*" | 
+    while read sourceDir; do 
+    RSYNC_MUTATE_COMMAND=( rsync $RSYNC_BASE_PARAMS $sourceDir $TARGET_ROOT )
+    "${RSYNC_MUTATE_COMMAND[@]}" # Runs command
+done
+echo "<<<< DONE WITH QUANTA FIN >>>>"
+echo ""
+echo ">>>> QUANTA LIB <<<<"
+find $LAMBDA_ROOT -path "*$LIB_DIR_NAME" -type d -not -path "*/_QLibs*" | 
+    while read sourceDir; do 
+    RSYNC_MUTATE_COMMAND=( rsync $RSYNC_BASE_PARAMS $sourceDir $TARGET_ROOT )
+    "${RSYNC_MUTATE_COMMAND[@]}" # Runs command
+done
+echo "<<<< DONE WITH QUANTA LIB >>>>"
+echo ""
+echo "FINISHED MUTATE GATHER!"
+exit 0
+
+# -a, --archive
+# 
+# This is equivalent to -rlptgoD. It is a quick way of saying you want recursion and want to preserve almost 
+# everything (with -H being a notable omission). The only exception to the above equivalence is when 
+# --files-from is specified, in which case -r is not implied.
+#
+# Note that -a does not preserve hardlinks, because finding multiply-linked files is expensive. You must 
+# separately specify -H.
+
+# -n, --dry-run
+# 
+# This makes rsync perform a trial run that doesn't make any changes (and produces mostly the same output as 
+# a real run). It is most commonly used in combination with the -v, --verbose and/or -i, --itemize-changes 
+# options to see what an rsync command is going to do before one actually runs it.
+# The output of --itemize-changes is supposed to be exactly the same on a dry run and a subsequent real run 
+# (barring intentional trickery and system call failures); if it isn't, that's a bug. Other output should be 
+# mostly unchanged, but may differ in some areas. Notably, a dry run does not send the actual data for file 
+# transfers, so --progress has no effect, the "bytes sent", "bytes received", "literal data", and "matched 
+# data" statistics are too small, and the "speedup" value is equivalent to a run where no file transfers were 
+# needed.
+
+# -u, --update
+# 
+# This forces rsync to skip any files which exist on the destination and have a modified time that is newer 
+# than the source file. (If an existing destination file has a modification time equal to the source file's, 
+# it will be updated if the sizes are different.)
+# Note that this does not affect the copying of dirs, symlinks, or other special files. Also, a difference of 
+# file format between the sender and receiver is always considered to be important enough for an update, no 
+# matter what date is on the objects. In other words, if the source has a directory where the destination has 
+# a file, the transfer would occur regardless of the timestamps.
+
+# This option is a transfer rule, not an exclude, so it doesn't affect the data that goes into the file-lists,
+# and thus it doesn't affect deletions. It just limits the files that the receiver requests to be transferred.
+
+# -t, --times
+# (included in -a)
+# 
+# This tells rsync to transfer modification times along with the files and update them on the remote system. 
+# Note that if this option is not used, the optimization that excludes files that have not been modified 
+# cannot be effective; in other words, a missing -t or -a will cause the next transfer to behave as if it used
+# -I, causing all files to be updated (though rsync's delta-transfer algorithm will make the update fairly 
+# efficient if the files haven't actually changed, you're much better off using -t).
+
+# -c, --checksum
+# 
+# This changes the way rsync checks if the files have been changed and are in need of a transfer. Without this
+# option, rsync uses a "quick check" that (by default) checks if each file's size and time of last modification
+# match between the sender and receiver. This option changes this to compare a 128-bit checksum for each file
+# that has a matching size. Generating the checksums means that both sides will expend a lot of disk I/O 
+# reading all the data in the files in the transfer (and this is prior to any reading that will be done to 
+# transfer changed files), so this can slow things down significantly.
+# The sending side generates its checksums while it is doing the file-system scan that builds the list of the
+# available files. The receiver generates its checksums when it is scanning for changed files, and will 
+# checksum any file that has the same size as the corresponding sender's file: files with either a changed 
+# size or a changed checksum are selected for transfer.
+
+# Note that rsync always verifies that each transferred file was correctly reconstructed on the receiving side
+# by checking a whole-file checksum that is generated as the file is transferred, but that automatic \
+# after-the-transfer verification has nothing to do with this option's before-the-transfer "Does this file 
+# need to be updated?" check.
+
+# For protocol 30 and beyond (first supported in 3.0.0), the checksum used is MD5. For older protocols, the 
+# checksum used is MD4.
+
+# -O, --omit-dir-times
+# 
+# This tells rsync to omit directories when it is preserving modification times (see --times). If NFS is 
+# sharing the directories on the receivin g side, it is a good idea to use -O. This option is inferred if you 
+# use --backup without --backup-dir.
+# 
+# This option also has the side-effect of avoiding early creation of directories in incremental recursion 
+# copies. The default --inc-recursive copying normally does an early-create pass of all the sub-directories in
+# a parent directory in order for it to be able to then set the modify time of the parent directory right away
+# (without having to delay that until a bunch of recursive copying has finished). This early-create idiom is 
+# not necessary if directory modify times are not being preserved, so it is skipped. Since early-create 
+# directories don't have accurate mode, mtime, or ownership, the use of this option can help when someone 
+# wants to avoid these partially-finished directories.
+
+# -i, --itemize-changes
+#
+# Requests a simple itemized list of the changes that are being made to each file, including attribute changes. 
+#   This is exactly the same as specifying --out-format='%i %n%L'. If you repeat the option, unchanged files 
+#   will also be output, but only if the receiving rsync is at least version 2.6.7 (you can use -vv with older 
+#   versions of rsync, but that also turns on the output of other verbose messages).
+#
+# The "%i" escape has a cryptic output that is 11 letters long. 
+#
+# The general format is like the string YXcstpoguax, where Y is replaced by the type of update being done, X 
+#   is replaced by the file-type, and the 
+#   other letters represent attributes that may be output if they are being modified.
+#
+# The update types that replace the Y are as follows:
+#
+# A . means that the item is not being updated (though it might have attributes that are being modified).
+# A < means that a file is being transferred to the remote host (sent).
+# A > means that a file is being transferred to the local host (received).
+# A c means that a local change/creation is occurring for the item (such as the creation of a directory or the
+#   changing of a symlink, etc.).
+# A h means that the item is a hard link to another item (requires --hard-links).
+# A * means that the rest of the itemized-output area contains a message (e.g. "deleting").
+#
+# The file-types that replace the X are: f for a file, a d for a directory, an L for a symlink, a D for a 
+#   device, and a S for a special file (e.g. named sockets and fifos).
+#
+# The other letters in the string above are the actual letters that will be output if the associated attribute
+#   for the item is being updated or a "." for no change. Three exceptions to this are: (1) a newly created 
+#   item replaces each letter with a "+", (2) an identical item replaces the dots with spaces, and (3) an 
+#   unknown attribute replaces each letter with a "?" (this can happen when talking to an older rsync).
+#
+# The attribute that is associated with each letter is as follows:
+#
+# A c means either that a regular file has a different checksum (requires --checksum) or that a symlink, 
+#   device, or special file has a changed value. Note that if you are sending files to an rsync prior to 
+#   3.0.1, this change flag will be present only for checksum-differing regular files.
+# A s means the size of a regular file is different and will be updated by the file transfer.
+# A t means the modification time is different and is being updated to the sender's value (requires --times). 
+#   An alternate value of T means that the modification time will be set to the transfer time, which happens 
+#   when a file/symlink/device is updated without --times and when a symlink is changed and the receiver can't
+#   set its time. (Note: when using an rsync 3.0.0 client, you might see the s flag combined with t instead of
+#   the proper T flag for this time-setting failure.)
+# A p means the permissions are different and are being updated to the sender's value (requires --perms).
+# An o means the owner is different and is being updated to the sender's value (requires --owner and super-user
+#   privileges).
+# A g means the group is different and is being updated to the sender's value (requires --group and the 
+#   authority to set the group).
+# The u slot is reserved for future use.
+# The a means that the ACL information changed.
+# The x means that the extended attribute information changed.
+#
+# One other output is possible: when deleting files, the "%i" will output the string "*deleting" for each item
+#   that is being removed (assuming that you are talking to a recent enough rsync that it logs deletions 
+#   instead of outputting them as a verbose message).
+
+# --stats
+# This tells rsync to print a verbose set of statistics on the file transfer, allowing you to tell how 
+# effective rsync's delta-transfer algorithm is for your data. This option is equivalent to --info=stats2 if 
+# combined with 0 or 1 -v options, or --info=stats3 if combined with 2 or more -v options.

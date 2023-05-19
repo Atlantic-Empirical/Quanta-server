@@ -1,0 +1,11 @@
+#!/bin/bash
+# Prints the name of every lambda under the Lambda directory
+
+LambdaRoot="/home/ec2-user/environment/Lambda"
+find $LambdaRoot -path '*/index.js' -type f -not -path '*node_modules*' -not -path '*_QLibs*' -not -path '*ThirdParty*' | 
+    while read pathName; do 
+        sourceDir=${pathName%'/index.js'} # strips the /index.js off the end
+        lambdaName=$(basename $sourceDir)
+        echo $lambdaName
+    done
+exit 0

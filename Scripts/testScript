@@ -1,0 +1,16 @@
+#!/bin/bash
+# you can use a=$("rsync command"). This would execute the rsync command and store stdout in a. Then you can run tests on a
+# you can call another script just like this "<scriptname>"
+# handling arguments: https://www.lifewire.com/pass-arguments-to-bash-script-2200571
+
+while getopts gf: option
+do
+    case "${option}"
+    in
+    f) FORMAT=$OPTARG;;
+    g) FORCE=true;;
+    esac
+done
+
+echo $FORMAT
+echo $FORCE

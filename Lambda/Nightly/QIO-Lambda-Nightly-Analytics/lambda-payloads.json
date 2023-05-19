@@ -1,0 +1,8 @@
+{
+    "FIO-Lambda-Analytics-Nightly": {
+        "lambda": {}
+    },
+    "QIO-Lambda-Nightly-Analytics": {
+        "lambda": {}
+    }
+}
